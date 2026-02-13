@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K0CH4M CI3 K1C1U$</title>
+    <style>
+        :root {
+            --color-primary: #ff69b4;
+            --color-secondary: #ff1493;
+            --color-bg: #fff0f5;
+            --color-text: #c71585;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 50%, #ff69b4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--color-text);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-sure {
+            background: linear-gradient(135deg, #ff1493, #c71585);
+        }
+
+        .btn-sure:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(199, 21, 133, 0.4);
+        }
+
+        .image-container {
+            display: none;
+            animation: zoomIn 0.5s ease-out;
+            cursor: pointer;
+        }
+
+        .image-container.show {
+            display: block;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            color: #ff1493;
+            pointer-events: none;
+            animation: float 3s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) rotate(360deg);
+            }
+        }
+
+        .cat-cursor {
+            position: fixed;
+            font-size: 2.5rem;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+
+        .cat-cursor.walking {
+            animation: catWalk 0.4s ease-in-out infinite;
+        }
+
+        @keyframes catWalk {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0) rotate(-3deg);
+            }
+            25% {
+                transform: translate(-50%, -50%) translateY(-2px) rotate(3deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(0) rotate(-3deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) translateY(-2px) rotate(3deg);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--color-secondary);
+            font-weight: 500;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .emoji {
+                font-size: 2.5rem;
+            }
+
+            button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="question-screen">
+            <div class="emoji">💕</div>
+            <h1>czy będziesz moja walentynką?</h1>
+            <div class="buttons">
+                <button class="btn-yes" onclick="showImage()">Tak</button>
+                <button class="btn-sure" onclick="showImage()">Oczywiście</button>
+            </div>
+        </div>
+
+        <div id="image-screen" class="image-container">
+            <div class="emoji">❤️</div>
+            <p class="message">wiedziałem!</p>
+            <img id="valentine-image" src="image.jpg" alt="Valentine photo">
+            <p style="margin-top: 1rem; color: var(--color-text); font-size: 0.9rem;">
+                dotknij mnie svvvvvko! 
+            </p>
+        </div>
+    </div>
+
+    <div class="cat-cursor" id="cat-cursor">🐱</div>
+
+    <audio id="music" loop>
+        <source src="sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="clickSound" preload="auto">
+        <source src="click.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById('music');
+        const clickSound = document.getElementById('clickSound');
+        const imageScreen = document.getElementById('image-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const valentineImage = document.getElementById('valentine-image');
+        const cat = document.getElementById('cat-cursor');
+        
+        let musicPlaying = false;
+        let clickCount = 0;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let catX = mouseX;
+        let catY = mouseY;
+        let targetX = mouseX;
+        let targetY = mouseY;
+
+        function playClickSound() {
+            const s = clickSound.cloneNode(true);
+            s.volume = 0.8;
+            s.play().catch(() => {});
+        }
+
+        function showImage() {
+            questionScreen.classList.add('hidden');
+            imageScreen.classList.add('show');
+            if (!musicPlaying) {
+                music.play().catch(() => {});
+                musicPlaying = true;
+            }
+        }
+
+        function createFloatingElement(x, y) {
+            clickCount++;
+            const el = document.createElement('div');
+            el.classList.add('heart');
+            el.innerHTML = clickCount % 2 === 1 ? '❤️' : '😻';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCat() {
+            targetX += (mouseX - targetX) * 0.015;
+            targetY += (mouseY - targetY) * 0.015;
+            
+            const dx = targetX - catX;
+            const dy = targetY - catY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist > 10) {
+                const angle = Math.atan2(dy, dx);
+                catX += Math.cos(angle) * 0.6;
+                catY += Math.sin(angle) * 0.6;
+                cat.classList.add('walking');
+            } else {
+                cat.classList.remove('walking');
+            }
+            
+            cat.style.left = catX + 'px';
+            cat.style.top = catY + 'px';
+            requestAnimationFrame(animateCat);
+        }
+        
+        animateCat();
+
+        document.addEventListener('click', (e) => {
+            if (imageScreen.classList.contains('show')) {
+                playClickSound();
+                createFloatingElement(e.clientX - 15, e.clientY - 15);
+                if (!musicPlaying) {
+                    music.play().catch(() => {});
+                    musicPlaying = true;
+                }
+            }
+        });
+
+        valentineImage.addEventListener('click', (e) => {
+            e.stopPropagation();
+            playClickSound();
+            createFloatingElement(e.clientX - 15, e.clientY - 15);
+        });
+    </script>
+</body>
+</html>
+
